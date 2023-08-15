@@ -6,9 +6,33 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScreenDimensions } from "./constants/ScreenDimensions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Main from "./screens/Main";
 
 export default function App() {
+  const [data, setData] = useState([]);
+
+  const saveData = async (newData) => {
+    const dataToSave = [...dataToSave, newData];
+    await AsyncStorage.setItem("TinyNotesData", JSON.stringify(dataToSave));
+    setData(dataToSave);
+  };
+
+  const loadData = async () => {
+    const savedData = await AsyncStorage.getItem("TinyNotesData");
+    if (savedData) {
+      setData(JSON.parse(savedData));
+    }
+  };
+
+  useEffect(() => {
+    saveData();
+  }, [data]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -24,7 +48,7 @@ export default function App() {
           style={styles.backgroundImage}
           imageStyle={{ opacity: 0.1 }}
         >
-          <Main />
+          <Main toDoList={data} />
           <StatusBar style="auto" />
         </ImageBackground>
       </LinearGradient>

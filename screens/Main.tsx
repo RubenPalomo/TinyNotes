@@ -4,8 +4,8 @@ import { ScreenDimensions } from "../constants/ScreenDimensions";
 import Bubble from "../components/Bubble";
 import FormularyModal from "../components/FormularyModal";
 
-export default function Main(): React.JSX.Element {
-  const [toDoList, setToDoList] = useState(["Item 1", "Item 2", "Item 3"]);
+export default function Main(props: { toDoList: string[] }): React.JSX.Element {
+  const [toDoList, setToDoList] = useState(props.toDoList);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const addElementToToDoList = (elementToAdd: string): void => {
