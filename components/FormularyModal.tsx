@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { View, Text, Modal, TextInput, StyleSheet } from "react-native";
 import Bubble from "./Bubble";
+import { t } from "../translations/translator"
 
 interface FormularyModalProps {
     isModalVisible: boolean,
@@ -33,7 +34,7 @@ export default function FormularyModal(props: FormularyModalProps) {
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <Text style={styles.instructions}>New to-do item:</Text>
+                    <Text style={styles.instructions}>{t("New_element")}:</Text>
                     <TextInput
                         style={styles.textInput}
                         value={textInputValue}
@@ -41,8 +42,8 @@ export default function FormularyModal(props: FormularyModalProps) {
                         onSubmitEditing={handleSave}
                         autoFocus={true}
                     />
-                    <Bubble text="Save" isTitle={true} onPressEvent={handleSave} />
-                    <Bubble text="Cancel" isTitle={true} onPressEvent={handleCancel} />
+                    <Bubble text={t("Save")} isTitle={true} onPressEvent={handleSave} />
+                    <Bubble text={t("Cancel")} isTitle={true} onPressEvent={handleCancel} />
                 </View>
             </View>
         </Modal>

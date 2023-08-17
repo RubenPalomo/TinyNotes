@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Alert } from "react-native";
 import { ScreenDimensions } from "../constants/ScreenDimensions";
 import Bubble from "../components/Bubble";
 import FormularyModal from "../components/FormularyModal";
+import { t } from "../translations/translator";
 
 export default function Main(props: { toDoList: string[], saveFunction: () => void }): React.JSX.Element {
   const [toDoList, setToDoList] = useState(props.toDoList);
@@ -15,15 +16,15 @@ export default function Main(props: { toDoList: string[], saveFunction: () => vo
 
   const removeElementFromToDoList = (elementToRemove: string): void => {
     Alert.alert(
-      "Confirm delete",
-      "Are you sure you want to delete this item?",
+      t("Confirm_delete"),
+      t("Are_you_sure"),
       [
         {
-          text: "Cancel",
+          text: t("Cancel"),
           style: "cancel"
         },
         {
-          text: "Acept",
+          text: t("Accept"),
           onPress: () => {
             setToDoList(toDoList.filter(item => item !== elementToRemove));
           }
@@ -42,7 +43,7 @@ export default function Main(props: { toDoList: string[], saveFunction: () => vo
       <View style={{ marginTop: 20 }}>
         <Bubble
           isTitle={true}
-          text={"New element"}
+          text={t("Add_element")}
           onPressEvent={() => setModalVisible(!isModalVisible)}
         />
       </View>
