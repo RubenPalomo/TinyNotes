@@ -30,36 +30,31 @@ export default function App() {
     loadData();
   }, []);
 
-  useEffect(() => {
-    saveData();
-  }, [data]);
-
   return (
-    <KeyboardAvoidingView style={styles.container} enabled={true}>
-      <LinearGradient colors={["#FFAE00", "#FDFF7D"]} style={styles.container}>
-        <ImageBackground
-          source={require("./assets/background.png")}
-          resizeMode="repeat"
-          style={styles.backgroundImage}
-          imageStyle={{ opacity: 0.1 }}
-        >
-          <Main toDoList={data} />
-          <StatusBar style="auto" />
-        </ImageBackground>
-      </LinearGradient>
-    </KeyboardAvoidingView>
+      <KeyboardAvoidingView style={styles.container} enabled={true}>
+        <LinearGradient colors={["#FFAE00", "#FDFF7D"]} style={styles.container}>
+          <ImageBackground
+            source={require("./assets/background.png")}
+            resizeMode="repeat"
+            style={styles.backgroundImage}
+            imageStyle={{ opacity: 0.1 }}
+          >
+            <Main toDoList={data} saveFunction={saveData} />
+            <StatusBar style="auto" />
+          </ImageBackground>
+        </LinearGradient>
+      </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   backgroundImage: {
-    width: ScreenDimensions.width,
-    height: ScreenDimensions.height,
+    width: "100%",
+    height: "100%",
   },
 });

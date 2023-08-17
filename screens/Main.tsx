@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { useEffect, useState } from "react";
+import { StyleSheet, View, ScrollView, Alert } from "react-native";
 import { ScreenDimensions } from "../constants/ScreenDimensions";
 import Bubble from "../components/Bubble";
 import FormularyModal from "../components/FormularyModal";
 
-export default function Main(props: { toDoList: string[] }): React.JSX.Element {
+export default function Main(props: { toDoList: string[], saveFunction: () => void }): React.JSX.Element {
   const [toDoList, setToDoList] = useState(props.toDoList);
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -14,8 +14,28 @@ export default function Main(props: { toDoList: string[] }): React.JSX.Element {
   }
 
   const removeElementFromToDoList = (elementToRemove: string): void => {
-    setToDoList(toDoList.filter(item => item !== elementToRemove));
+    Alert.alert(
+      "Confirm delete",
+      "Are you sure you want to delete this item?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Acept",
+          onPress: () => {
+            setToDoList(toDoList.filter(item => item !== elementToRemove));
+          }
+        }
+      ],
+      { cancelable: false }
+    )
   }
+
+  useEffect(() => {
+    props.saveFunction();
+  }, [toDoList]);
 
   return (
     <View style={styles.container}>
@@ -39,7 +59,7 @@ export default function Main(props: { toDoList: string[] }): React.JSX.Element {
       <FormularyModal
         isModalVisible={isModalVisible}
         setModalVisible={setModalVisible}
-        saveFunction={addElementToToDoList}
+        addFunction={addElementToToDoList}
       />
     </View>
   );
@@ -49,8 +69,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: ScreenDimensions.width,
+    marginTop: "5%",
   },
   scrollViewContainer: {
     flex: 1,
-  }
+  },
 });

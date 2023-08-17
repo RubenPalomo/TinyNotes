@@ -15,16 +15,16 @@ export default function Bubble(props: BubbleProps): React.JSX.Element {
     let padding: number;
     let fontSize: number;
     let textAlign: 'center' | 'left';
-    if (props.isTitle){
-            padding = 15,
+    if (props.isTitle) {
+        padding = 15,
             fontSize = 20,
             textAlign = 'center'
-        }
+    }
     else {
-            padding = 10,
+        padding = 10,
             fontSize = 15,
             textAlign = 'left'
-        }
+    }
 
     const backgroundColorStyle = {
         backgroundColor: backgroundColor,
@@ -57,15 +57,16 @@ export default function Bubble(props: BubbleProps): React.JSX.Element {
         setBackgroundColor("darkmagenta");
     };
 
-    const handleFunction = (e: any): void => {
-        props.onLongPressEvent(e.target.textContent);
+    const handleFunction = (textBubble: string): void => {
+        if (props.onLongPressEvent)
+            props.onLongPressEvent(textBubble);
     }
 
     return (
         <Pressable
             style={[styles.bubbleContainer, backgroundColorStyle, { padding: padding }]}
             onPress={props.onPressEvent}
-            onLongPress={handleFunction}
+            onLongPress={() => handleFunction(props.text)}
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
             disabled={!isEnabled}>
@@ -73,7 +74,7 @@ export default function Bubble(props: BubbleProps): React.JSX.Element {
                 styles.BubbleBtnTxt,
                 textOpacityStyle,
                 { fontSize: fontSize, textAlign: textAlign },
-                ]}>
+            ]}>
                 {props.text}
             </Animated.Text>
         </Pressable>

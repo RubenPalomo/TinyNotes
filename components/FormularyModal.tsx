@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { View, Text, Modal, TextInput, StyleSheet, Platform } from "react-native";
+import { View, Text, Modal, TextInput, StyleSheet } from "react-native";
 import Bubble from "./Bubble";
 
 interface FormularyModalProps {
     isModalVisible: boolean,
     setModalVisible: Dispatch<SetStateAction<boolean>>,
-    saveFunction: (elementToAdd: string) => void
+    addFunction: (elementToAdd: string) => void
 }
 
 export default function FormularyModal(props: FormularyModalProps) {
@@ -14,7 +14,7 @@ export default function FormularyModal(props: FormularyModalProps) {
     const handleSave = () => {
         if (textInputValue !== "") {
             props.setModalVisible(!props.isModalVisible);
-            props.saveFunction(textInputValue)
+            props.addFunction(textInputValue)
             setTextInputValue("");
         }
     };
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 10,
         alignItems: "center",
+        width: "90%",
     },
     textInput: {
         width: "90%",
