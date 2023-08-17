@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { View, Text, Pressable, Modal, TextInput, StyleSheet } from "react-native";
+import { View, Text, Modal, TextInput, StyleSheet, Platform } from "react-native";
 import Bubble from "./Bubble";
 
 interface FormularyModalProps {
@@ -38,6 +38,8 @@ export default function FormularyModal(props: FormularyModalProps) {
                         style={styles.textInput}
                         value={textInputValue}
                         onChangeText={(text) => setTextInputValue(text)}
+                        onSubmitEditing={handleSave}
+                        autoFocus={true}
                     />
                     <Bubble text="Save" isTitle={true} onPressEvent={handleSave} />
                     <Bubble text="Cancel" isTitle={true} onPressEvent={handleCancel} />

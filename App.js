@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -26,22 +27,16 @@ export default function App() {
   };
 
   useEffect(() => {
-    saveData();
-  }, [data]);
-
-  useEffect(() => {
     loadData();
   }, []);
 
+  useEffect(() => {
+    saveData();
+  }, [data]);
+
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      enabled={true}
-    >
-      <LinearGradient
-        colors={["#FFAE00", "#FDFF7D"]}
-        style={styles.container}
-      >
+    <KeyboardAvoidingView style={styles.container} enabled={true}>
+      <LinearGradient colors={["#FFAE00", "#FDFF7D"]} style={styles.container}>
         <ImageBackground
           source={require("./assets/background.png")}
           resizeMode="repeat"
