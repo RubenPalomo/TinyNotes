@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { StyleSheet, Pressable, Animated } from "react-native";
+import { PlaySound } from "./PlaySound";
 
 interface BubbleProps {
     text: string;
@@ -38,6 +39,7 @@ export default function Bubble(props: BubbleProps) {
     };
 
     const handlePressIn = (): void => {
+        PlaySound(require("../assets/sounds/press-in.mp3"), false);
         setIsEnabled(false);
         Animated.timing(shadowOpacity, {
             toValue: 1,

@@ -1,6 +1,7 @@
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { t } from "../translations/translator";
+import { PlaySound } from "./PlaySound";
 
 interface propsHeader {
     changeModalVisibility: () => void
@@ -8,8 +9,14 @@ interface propsHeader {
 }
 
 export default function Header(props: propsHeader) {
-    const addElement = (): void => props.changeModalVisibility();
-    const removeAllElements = ():void => props.removeAllElementsFromToDoList();
+    const addElement = (): void => {
+        PlaySound(require("../assets/sounds/press-in.mp3"), false);
+        props.changeModalVisibility()
+    }
+    const removeAllElements = (): void => {
+        PlaySound(require("../assets/sounds/press-in.mp3"), false);
+        props.removeAllElementsFromToDoList()
+    }
 
     return (
         <View style={styles.header}>
@@ -33,7 +40,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "darkorange",
         marginTop: "4.5%",
-        borderWidth: 1,
+        borderWidth: 2,
     },
     title: {
         flex: 2,
