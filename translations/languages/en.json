@@ -1,9 +1,13 @@
 {
+    "Title": "Tiny Notes",
     "Save": "Save",
     "Accept": "Accept",
     "Cancel": "Cancel",
     "Add_element": "Add element",
     "New_element": "New to-do item",
     "Confirm_delete": "Confirm delete",
-    "Are_you_sure": "Are you sure you want to remove this item?"
+    "Confirm_delete_element": "Are you sure you want to remove this item?",
+    "Confirm_delete_all": "Are you sure you want to remove all the elements?",
+    "Add_new": "Add new",
+    "Delete_all": "Delete all"
 }

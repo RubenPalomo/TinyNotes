@@ -1,9 +1,13 @@
 {
+    "Title": "Notitas",
     "Save": "Guardar",
     "Accept": "Aceptar",
     "Cancel": "Cancelar",
     "Add_element": "Añadir elemento",
     "New_element": "Nuevo elemento",
     "Confirm_delete": "Confirmar eliminar",
-    "Are_you_sure": "¿Está seguro de que quiere eliminar este elemento?"
+    "Confirm_delete_element": "¿Está seguro de que quiere eliminar este elemento?",
+    "Confirm_delete_all": "¿Está seguro de que quiere eliminar todos los elementos de la lista?",
+    "Add_new": "Añadir nuevo",
+    "Delete_all": "Borrar todo"
 }

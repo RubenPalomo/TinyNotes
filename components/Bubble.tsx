@@ -3,27 +3,27 @@ import { StyleSheet, Pressable, Animated } from "react-native";
 
 interface BubbleProps {
     text: string;
-    isTitle: boolean;
+    isList: boolean;
     onPressEvent?: () => void;
     onLongPressEvent?: (elementToRemove: string) => void;
 }
 
-export default function Bubble(props: BubbleProps): React.JSX.Element {
+export default function Bubble(props: BubbleProps) {
     const [isEnabled, setIsEnabled] = useState<boolean>(true);
     const shadowOpacity = useRef(new Animated.Value(0)).current;
     const [backgroundColor, setBackgroundColor] = useState("darkmagenta");
     let padding: number;
     let fontSize: number;
     let textAlign: 'center' | 'left';
-    if (props.isTitle) {
-        padding = 15,
-            fontSize = 20,
-            textAlign = 'center'
+    if (!props.isList) {
+        padding = 15;
+        fontSize = 20;
+        textAlign = 'center';
     }
     else {
-        padding = 10,
-            fontSize = 15,
-            textAlign = 'left'
+        padding = 10;
+        fontSize = 20;
+        textAlign = 'left';
     }
 
     const backgroundColorStyle = {

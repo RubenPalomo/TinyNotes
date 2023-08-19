@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View, ScrollView, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScreenDimensions } from "../constants/ScreenDimensions";
+import { t } from "../translations/translator";
+import Header from "../components/Header";
 import Bubble from "../components/Bubble";
 import FormularyModal from "../components/FormularyModal";
-import { t } from "../translations/translator";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Main(): React.JSX.Element {
+export default function Main() {
   const [appData, setAppData] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
+  const changeModalVisibility = (): void => setModalVisible(!isModalVisible);
 
-  const _storeData = async (dataToStore) => {
+  const _storeData = async (dataToStore: string[]) => {
     try {
       await AsyncStorage.setItem(
         'TinyNotesData',
@@ -32,10 +34,6 @@ export default function Main(): React.JSX.Element {
     }
   };
 
-  useEffect(() => {
-    _retrieveData();
-  }, []);
-
   const addElementToToDoList = (elementToAdd: string): void => {
     appData.push(elementToAdd)
     setAppData(appData);
@@ -45,7 +43,7 @@ export default function Main(): React.JSX.Element {
   const removeElementFromToDoList = (elementToRemove: string): void => {
     Alert.alert(
       t("Confirm_delete"),
-      t("Are_you_sure"),
+      t("Confirm_delete_element"),
       [
         {
           text: t("Cancel"),
@@ -64,20 +62,43 @@ export default function Main(): React.JSX.Element {
     )
   }
 
+  const removeAllElementsFromToDoList = (): void => {
+    Alert.alert(
+      t("Confirm_delete"),
+      t("Confirm_delete_all"),
+      [
+        {
+          text: t("Cancel"),
+          style: "cancel"
+        },
+        {
+          text: t("Accept"),
+          onPress: () => {
+            ;
+            setAppData([]);
+            _storeData([]);
+          }
+        }
+      ],
+      { cancelable: false }
+    )
+  }
+
+  useEffect(() => {
+    _retrieveData();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <View style={{ marginTop: 20 }}>
-        <Bubble
-          isTitle={true}
-          text={t("Add_element")}
-          onPressEvent={() => setModalVisible(!isModalVisible)}
-        />
-      </View>
+      <Header
+        changeModalVisibility={changeModalVisibility}
+        removeAllElementsFromToDoList={removeAllElementsFromToDoList}
+      />
       <ScrollView style={styles.scrollViewContainer}>
         {appData.map((element, index) => (
           <Bubble
             key={index}
-            isTitle={false}
+            isList={true}
             text={element}
             onLongPressEvent={removeElementFromToDoList}
           />
@@ -85,7 +106,7 @@ export default function Main(): React.JSX.Element {
       </ScrollView>
       <FormularyModal
         isModalVisible={isModalVisible}
-        setModalVisible={setModalVisible}
+        changeModalVisibility={changeModalVisibility}
         addFunction={addElementToToDoList}
       />
     </View>
@@ -100,5 +121,6 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     flex: 1,
+    marginTop: 10,
   },
 });

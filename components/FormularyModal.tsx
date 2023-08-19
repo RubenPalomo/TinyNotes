@@ -5,7 +5,7 @@ import { t } from "../translations/translator"
 
 interface FormularyModalProps {
     isModalVisible: boolean,
-    setModalVisible: Dispatch<SetStateAction<boolean>>,
+    changeModalVisibility: () => void,
     addFunction: (elementToAdd: string) => void
 }
 
@@ -14,14 +14,14 @@ export default function FormularyModal(props: FormularyModalProps) {
 
     const handleSave = () => {
         if (textInputValue !== "") {
-            props.setModalVisible(!props.isModalVisible);
+            props.changeModalVisibility();
             props.addFunction(textInputValue)
             setTextInputValue("");
         }
     };
 
     const handleCancel = () => {
-        props.setModalVisible(false);
+        props.changeModalVisibility();
         setTextInputValue("");
     };
 
@@ -42,8 +42,8 @@ export default function FormularyModal(props: FormularyModalProps) {
                         onSubmitEditing={handleSave}
                         autoFocus={true}
                     />
-                    <Bubble text={t("Save")} isTitle={true} onPressEvent={handleSave} />
-                    <Bubble text={t("Cancel")} isTitle={true} onPressEvent={handleCancel} />
+                    <Bubble text={t("Save")} isList={false} onPressEvent={handleSave} />
+                    <Bubble text={t("Cancel")} isList={false} onPressEvent={handleCancel} />
                 </View>
             </View>
         </Modal>
