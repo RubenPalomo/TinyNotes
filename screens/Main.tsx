@@ -4,14 +4,42 @@ import { ScreenDimensions } from "../constants/ScreenDimensions";
 import Bubble from "../components/Bubble";
 import FormularyModal from "../components/FormularyModal";
 import { t } from "../translations/translator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Main(props: { toDoList: string[], saveFunction: () => void }): React.JSX.Element {
-  const [toDoList, setToDoList] = useState(props.toDoList);
+export default function Main(): React.JSX.Element {
+  const [appData, setAppData] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
 
+  const _storeData = async (dataToStore) => {
+    try {
+      await AsyncStorage.setItem(
+        'TinyNotesData',
+        JSON.stringify(dataToStore)
+      );
+    } catch (error) {
+      Alert.alert("Error", error);
+    }
+  };
+
+  const _retrieveData = async () => {
+    try {
+      const storedData = await AsyncStorage.getItem('TinyNotesData');
+      if (storedData !== null) {
+        setAppData(JSON.parse(storedData));
+      }
+    } catch (error) {
+      Alert.alert("Error", error);
+    }
+  };
+
+  useEffect(() => {
+    _retrieveData();
+  }, []);
+
   const addElementToToDoList = (elementToAdd: string): void => {
-    toDoList.push(elementToAdd)
-    setToDoList(toDoList);
+    appData.push(elementToAdd)
+    setAppData(appData);
+    _storeData(appData);
   }
 
   const removeElementFromToDoList = (elementToRemove: string): void => {
@@ -26,17 +54,15 @@ export default function Main(props: { toDoList: string[], saveFunction: () => vo
         {
           text: t("Accept"),
           onPress: () => {
-            setToDoList(toDoList.filter(item => item !== elementToRemove));
+            const newAppData = appData.filter(item => item !== elementToRemove);
+            setAppData(newAppData);
+            _storeData(newAppData);
           }
         }
       ],
       { cancelable: false }
     )
   }
-
-  useEffect(() => {
-    props.saveFunction();
-  }, [toDoList]);
 
   return (
     <View style={styles.container}>
@@ -48,7 +74,7 @@ export default function Main(props: { toDoList: string[], saveFunction: () => vo
         />
       </View>
       <ScrollView style={styles.scrollViewContainer}>
-        {toDoList.map((element, index) => (
+        {appData.map((element, index) => (
           <Bubble
             key={index}
             isTitle={false}
