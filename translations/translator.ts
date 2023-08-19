@@ -5,8 +5,7 @@ type Translations = {
 };
 
 export const t = (key: string): string => {
-    // const deviceLanguage: string = RNLocalize.getLocales()[0].languageCode;
-    const deviceLanguage: string = "en";
+    const deviceLanguage: string = RNLocalize.getLocales()[0].languageCode;
     let translations: Translations;
     switch (deviceLanguage) {
         case 'es':
