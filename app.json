@@ -11,19 +11,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#FEFFEA"
     },
-    "plugins": [
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/icon.png",
-          "color": "#FEFFEA",
-          "sounds": [
-            "./assets/sounds/click.mp3",
-            "./assets/sounds/press-out.mp3"
-          ]
-        }
-      ]
-    ],
     "assetBundlePatterns": [
       "**/*"
     ],
