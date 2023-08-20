@@ -9,8 +9,21 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FEFFEA"
     },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#FEFFEA",
+          "sounds": [
+            "./assets/sounds/click.mp3",
+            "./assets/sounds/press-out.mp3"
+          ]
+        }
+      ]
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -20,7 +33,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#858585"
       },
       "package": "com.rubenpf.TinyNotes"
     },
