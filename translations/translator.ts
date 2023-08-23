@@ -1,4 +1,4 @@
-import * as RNLocalize from 'react-native-localize';
+import * as RNLocalize from "react-native-localize";
 
 type Translations = {
     [key: string]: string;
@@ -8,12 +8,12 @@ export const t = (key: string): string => {
     const deviceLanguage: string = RNLocalize.getLocales()[0].languageCode;
     let translations: Translations;
     switch (deviceLanguage) {
-        case 'es':
-            translations = require('./languages/es.json');
+        case "es":
+            translations = require("./languages/es.json");
             break;
 
         default:
-            translations = require('./languages/en.json');
+            translations = require("./languages/en.json");
             break;
     }
 

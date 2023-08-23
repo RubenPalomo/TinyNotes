@@ -1,33 +1,43 @@
 import { View, StyleSheet, Text, Pressable } from "react-native";
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { t } from "../translations/translator";
 import { PlaySound } from "./PlaySound";
 
 interface propsHeader {
-    changeModalVisibility: () => void
-    removeAllElementsFromToDoList: () => void
+    changeModalVisibility: () => void;
+    removeAllElementsFromToDoList: () => void;
 }
 
 export default function Header(props: propsHeader) {
     const addElement = (): void => {
         PlaySound(require("../assets/sounds/press-in.mp3"), false);
-        props.changeModalVisibility()
-    }
+        props.changeModalVisibility();
+    };
     const removeAllElements = (): void => {
         PlaySound(require("../assets/sounds/press-in.mp3"), false);
-        props.removeAllElementsFromToDoList()
-    }
+        props.removeAllElementsFromToDoList();
+    };
 
     return (
         <View style={styles.header}>
             <Text style={styles.title}>{t("Title")}</Text>
             <View style={styles.buttonContainer}>
                 <Pressable onPress={removeAllElements} style={styles.button}>
-                    <MaterialCommunityIcons name="delete" size={32} color="red" style={styles.icon} />
+                    <MaterialCommunityIcons
+                        name="delete"
+                        size={32}
+                        color="red"
+                        style={styles.icon}
+                    />
                     <Text style={styles.textButton}>{t("Delete_all")}</Text>
                 </Pressable>
                 <Pressable onPress={addElement} style={styles.button}>
-                    <Ionicons name="add-circle" size={32} color="green" style={styles.icon} />
+                    <Ionicons
+                        name="add-circle"
+                        size={32}
+                        color="green"
+                        style={styles.icon}
+                    />
                     <Text style={styles.textButton}>{t("Add_new")}</Text>
                 </Pressable>
             </View>
@@ -64,5 +74,5 @@ const styles = StyleSheet.create({
         fontSize: 10,
         width: 40,
         textAlign: "center",
-    }
+    },
 });

@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { View, Text, Modal, TextInput, StyleSheet } from "react-native";
 import Bubble from "./Bubble";
-import { t } from "../translations/translator"
+import { t } from "../translations/translator";
 
 interface FormularyModalProps {
-    isModalVisible: boolean,
-    changeModalVisibility: () => void,
-    addFunction: (elementToAdd: string) => void
+    isModalVisible: boolean;
+    changeModalVisibility: () => void;
+    addFunction: (elementToAdd: string) => void;
 }
 
 export default function FormularyModal(props: FormularyModalProps) {
@@ -15,7 +15,7 @@ export default function FormularyModal(props: FormularyModalProps) {
     const handleSave = () => {
         if (textInputValue !== "") {
             props.changeModalVisibility();
-            props.addFunction(textInputValue)
+            props.addFunction(textInputValue);
             setTextInputValue("");
         }
     };
@@ -42,8 +42,16 @@ export default function FormularyModal(props: FormularyModalProps) {
                         onSubmitEditing={handleSave}
                         autoFocus={true}
                     />
-                    <Bubble text={t("Save")} isList={false} onPressEvent={handleSave} />
-                    <Bubble text={t("Cancel")} isList={false} onPressEvent={handleCancel} />
+                    <Bubble
+                        text={t("Save")}
+                        isList={false}
+                        onPressEvent={handleSave}
+                    />
+                    <Bubble
+                        text={t("Cancel")}
+                        isList={false}
+                        onPressEvent={handleCancel}
+                    />
                 </View>
             </View>
         </Modal>
@@ -90,5 +98,5 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: "left",
         width: "100%",
-    }
+    },
 });
