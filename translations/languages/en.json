@@ -9,5 +9,6 @@
     "Confirm_delete_element": "Are you sure you want to remove this item?",
     "Confirm_delete_all": "Are you sure you want to remove all the elements?",
     "Add_new": "Add new",
-    "Delete_all": "Delete all"
+    "Delete_all": "Delete all",
+    "Something_to_do": "You have something to do in TinyNotes!"
 }

@@ -22,7 +22,7 @@ export default function Bubble(props: BubbleProps) {
         textAlign = "left";
     }
 
-    const handlePressIn = (): void => {
+    const playClickSound = (): void => {
         PlaySound(require("../assets/sounds/press-in.mp3"), false);
     };
 
@@ -36,7 +36,7 @@ export default function Bubble(props: BubbleProps) {
                 style={[styles.bubbleInnerContainer, { padding: padding }]}
                 onPress={props.onPressEvent}
                 onLongPress={() => handleFunction(props.text)}
-                onPressIn={handlePressIn}
+                onPressIn={playClickSound}
                 android_ripple={{
                     color: "indigo",
                 }}

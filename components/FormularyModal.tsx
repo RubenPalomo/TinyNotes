@@ -10,12 +10,14 @@ interface FormularyModalProps {
 }
 
 export default function FormularyModal(props: FormularyModalProps) {
-    const [textInputValue, setTextInputValue] = useState("");
+    const [textInputValue, setTextInputValue] = useState<string>("");
 
     const handleSave = () => {
-        if (textInputValue !== "") {
+        const textToSave = textInputValue.trim();
+
+        if (textToSave !== "") {
             props.changeModalVisibility();
-            props.addFunction(textInputValue);
+            props.addFunction(textToSave);
             setTextInputValue("");
         }
     };

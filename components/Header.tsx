@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "darkorange",
         marginTop: "4.5%",
+        marginBottom: 5,
         borderWidth: 2,
     },
     title: {

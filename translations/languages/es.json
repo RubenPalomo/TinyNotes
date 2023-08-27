@@ -9,5 +9,6 @@
     "Confirm_delete_element": "¿Está seguro de que quiere eliminar este elemento?",
     "Confirm_delete_all": "¿Está seguro de que quiere eliminar todos los elementos de la lista?",
     "Add_new": "Añadir nuevo",
-    "Delete_all": "Borrar todo"
+    "Delete_all": "Borrar todo",
+    "Something_to_do": "¡Tienes algo que hacer en Notitas!"
 }
