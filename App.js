@@ -36,7 +36,7 @@ export default function App() {
 					imageStyle={{ opacity: 0.1 }}
 				>
 					<Main />
-					<StatusBar backgroundColor="black" barStyle="light-content" />
+					<StatusBar style="auto" />
 				</ImageBackground>
 			</LinearGradient>
 		</KeyboardAvoidingView>
