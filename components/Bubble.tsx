@@ -41,12 +41,7 @@ export default function Bubble(props: BubbleProps) {
                     color: "indigo",
                 }}
             >
-                <Text
-                    style={[
-                        styles.BubbleBtnTxt,
-                        { fontSize: fontSize, textAlign: textAlign },
-                    ]}
-                >
+                <Text style={[{ fontSize: fontSize, textAlign: textAlign }]}>
                     {props.text}
                 </Text>
             </Pressable>
@@ -60,15 +55,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         width: "90%",
         overflow: "hidden",
-        backgroundColor: "darkmagenta",
+        backgroundColor: "gold",
         borderRadius: 20,
-        borderWidth: 1,
     },
     bubbleInnerContainer: {
         width: "100%",
         elevation: 8,
-    },
-    BubbleBtnTxt: {
-        color: "white",
     },
 });

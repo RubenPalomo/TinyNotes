@@ -7,6 +7,7 @@ type Translations = {
 export const t = (key: string): string => {
     const deviceLanguage: string = RNLocalize.getLocales()[0].languageCode;
     let translations: Translations;
+
     switch (deviceLanguage) {
         case "es":
             translations = require("./languages/es.json");

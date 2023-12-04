@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, Modal, TextInput, StyleSheet } from "react-native";
 import Bubble from "./Bubble";
 import { t } from "../translations/translator";
@@ -36,7 +36,7 @@ export default function FormularyModal(props: FormularyModalProps) {
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <Text style={styles.instructions}>{t("New_element")}:</Text>
+                    <Text style={styles.instructions}>{t("Add_new")}:</Text>
                     <TextInput
                         style={styles.textInput}
                         value={textInputValue}

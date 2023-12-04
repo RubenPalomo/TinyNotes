@@ -4,11 +4,10 @@
     "Accept": "Accept",
     "Cancel": "Cancel",
     "Add_element": "Add element",
-    "New_element": "New to-do item",
     "Confirm_delete": "Confirm delete",
     "Confirm_delete_element": "Are you sure you want to remove this item?",
     "Confirm_delete_all": "Are you sure you want to remove all the elements?",
-    "Add_new": "Add new",
+    "Add_new": "New Tiny Note",
     "Delete_all": "Delete all",
     "Something_to_do": "You have something to do in TinyNotes!"
 }
