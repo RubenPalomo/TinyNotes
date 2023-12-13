@@ -1,11 +1,10 @@
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { t } from "../translations/translator";
 
 export default function Header() {
     return (
         <View style={styles.header}>
             <Text style={styles.title}>{t("Title")}</Text>
-            <Image source={require("../assets/icon.png")} style={styles.icon} />
         </View>
     );
 }
@@ -26,7 +25,6 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 35,
         margin: 20,
-        marginRight: "20%",
         textAlign: "center",
     },
     icon: {

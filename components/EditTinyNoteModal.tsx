@@ -1,42 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Modal, TextInput, StyleSheet } from "react-native";
 import Bubble from "./Bubble";
 import { t } from "../translations/translator";
 
-interface FormularyModalProps {
+interface EditTinyNoteModalProps {
+    id: number;
+    noteToEdit: string;
     isModalVisible: boolean;
-    changeModalVisibility: () => void;
-    addFunction: (elementToAdd: string) => void;
+    closeModal: () => void;
+    editFunction: (id: number, elementToEdit: string) => void;
 }
 
-export default function FormularyModal(props: FormularyModalProps) {
-    const [textInputValue, setTextInputValue] = useState<string>("");
+export default function EditTinyNoteModal(props: EditTinyNoteModalProps) {
+    const [textInputValue, setTextInputValue] = useState<string>(
+        props.noteToEdit
+    );
 
     const handleSave = () => {
         const textToSave = textInputValue.trim();
 
         if (textToSave !== "") {
-            props.changeModalVisibility();
-            props.addFunction(textToSave);
+            props.closeModal();
+            props.editFunction(props.id, textToSave);
             setTextInputValue("");
         }
     };
 
     const handleCancel = () => {
-        props.changeModalVisibility();
-        setTextInputValue("");
+        props.closeModal();
+        setTextInputValue(props.noteToEdit);
     };
+
+    useEffect(() => {
+        setTextInputValue(props.noteToEdit);
+    }, [props.noteToEdit]);
 
     return (
         <Modal
             visible={props.isModalVisible}
-            animationType="slide"
+            animationType="none"
             transparent={true}
             onRequestClose={handleCancel}
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <Text style={styles.instructions}>{t("Add_new")}:</Text>
+                    <Text style={styles.instructions}>{t("Edit_note")}:</Text>
                     <TextInput
                         style={styles.textInput}
                         value={textInputValue}
@@ -53,6 +61,7 @@ export default function FormularyModal(props: FormularyModalProps) {
                         text={t("Cancel")}
                         isList={false}
                         onPressEvent={handleCancel}
+                        backgroundColor="white"
                     />
                 </View>
             </View>

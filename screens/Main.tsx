@@ -4,13 +4,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScreenDimensions } from "../constants/ScreenDimensions";
 import { t } from "../translations/translator";
 import Header from "../components/Header";
-import Bubble from "../components/Bubble";
-import FormularyModal from "../components/FormularyModal";
+import AddTinyNoteModal from "../components/AddTinyNoteModal";
+import EditTinyNoteModal from "../components/EditTinyNoteModal";
 import OptionsBtn from "../components/OptionsBtn";
+import TinyNoteComponent from "../components/TinyNoteComponent";
 import {
     schedulePushNotification,
     cancelScheduledNotification,
-} from "../components/PushNotificationsManager";
+} from "../util/PushNotificationsManager";
 
 interface storedDataObject {
     text: string;
@@ -19,10 +20,16 @@ interface storedDataObject {
 
 export default function Main() {
     const [appData, setAppData] = useState<storedDataObject[]>([]);
-    const [isModalVisible, setModalVisible] = useState<boolean>(false);
-    const changeModalVisibility = (): void => setModalVisible(!isModalVisible);
+    const [isAddModalVisible, setIsAddModalVisible] = useState<boolean>(false);
+    const [isEditModalVisible, setIsEditModalVisible] =
+        useState<boolean>(false);
+    const [editModalId, setEditModalId] = useState<number | undefined>();
+    const [editModalText, setEditModalText] = useState<string>("");
+    const [openNoteId, setOpenNoteId] = useState<number | null>(null);
 
-    const _storeData = async (dataToStore: storedDataObject[]) => {
+    const _storeData = async (
+        dataToStore: storedDataObject[]
+    ): Promise<void> => {
         try {
             await AsyncStorage.setItem(
                 "TinyNotesData",
@@ -33,7 +40,7 @@ export default function Main() {
         }
     };
 
-    const _retrieveData = async () => {
+    const _retrieveData = async (): Promise<void> => {
         try {
             const storedData = await AsyncStorage.getItem("TinyNotesData");
             if (storedData !== null) {
@@ -44,7 +51,9 @@ export default function Main() {
         }
     };
 
-    const addElementToToDoList = async (elementToAdd: string) => {
+    const addElementToToDoList = async (
+        elementToAdd: string
+    ): Promise<void> => {
         const idNotification = await schedulePushNotification(
             t("Something_to_do"),
             elementToAdd,
@@ -56,6 +65,27 @@ export default function Main() {
         };
 
         const updatedAppData = [...appData, newObject];
+
+        setAppData(updatedAppData);
+        _storeData(updatedAppData);
+    };
+
+    const editElementFromToDoList = async (
+        id: number,
+        elementToEdit: string
+    ): Promise<void> => {
+        const idNotification = await schedulePushNotification(
+            t("Something_to_do"),
+            elementToEdit,
+            86400
+        );
+        const editedObject: storedDataObject = {
+            text: elementToEdit,
+            idNotification: idNotification,
+        };
+
+        const updatedAppData = [...appData];
+        updatedAppData[id] = editedObject;
 
         setAppData(updatedAppData);
         _storeData(updatedAppData);
@@ -90,6 +120,12 @@ export default function Main() {
         );
     };
 
+    const openEditModal = async (id: number, text: string): Promise<void> => {
+        setEditModalId(id);
+        setEditModalText(text);
+        setIsEditModalVisible(!isEditModalVisible);
+    };
+
     const removeAllElementsFromToDoList = (): void => {
         Alert.alert(
             t("Confirm_delete"),
@@ -118,27 +154,47 @@ export default function Main() {
         _retrieveData();
     }, []);
 
+    useEffect(() => {
+        _retrieveData();
+    }, []);
+
     return (
         <View style={styles.container}>
             <Header />
             <ScrollView style={styles.scrollViewContainer}>
                 {appData.map((element, index) => (
-                    <Bubble
+                    <TinyNoteComponent
                         key={index}
-                        isList={true}
+                        id={index}
                         text={element.text}
-                        onLongPressEvent={removeElementFromToDoList}
+                        changeOpenNoteId={setOpenNoteId}
+                        areOptionsOpen={openNoteId === index}
+                        editElementFromToDoList={() =>
+                            openEditModal(index, element.text)
+                        }
+                        removeElementFromToDoList={removeElementFromToDoList}
                     />
                 ))}
             </ScrollView>
-            <FormularyModal
-                isModalVisible={isModalVisible}
-                changeModalVisibility={changeModalVisibility}
+            <AddTinyNoteModal
+                isModalVisible={isAddModalVisible}
+                changeModalVisibility={() => {
+                    setIsAddModalVisible(!isAddModalVisible);
+                }}
                 addFunction={addElementToToDoList}
+            />
+            <EditTinyNoteModal
+                id={editModalId}
+                isModalVisible={isEditModalVisible}
+                noteToEdit={editModalText}
+                closeModal={() => setIsEditModalVisible(false)}
+                editFunction={editElementFromToDoList}
             />
             <View style={styles.optionsButtonContainer}>
                 <OptionsBtn
-                    changeModalVisibility={changeModalVisibility}
+                    changeModalVisibility={() => {
+                        setIsAddModalVisible(!isAddModalVisible);
+                    }}
                     removeAllElementsFromToDoList={
                         removeAllElementsFromToDoList
                     }
