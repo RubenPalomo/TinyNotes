@@ -1,3 +1,4 @@
+import React from "react";
 import { View, Pressable, Text, StyleSheet } from "react-native";
 import { PlayClickSound } from "../util/PlaySound";
 

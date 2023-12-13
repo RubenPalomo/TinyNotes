@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, ScrollView, Alert, Text } from "react-native";
+import { StyleSheet, View, ScrollView, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScreenDimensions } from "../constants/ScreenDimensions";
 import { t } from "../translations/translator";
