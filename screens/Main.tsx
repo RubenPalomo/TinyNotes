@@ -120,7 +120,7 @@ export default function Main() {
         );
     };
 
-    const openEditModal = async (id: number, text: string): Promise<void> => {
+    const openEditModal = (id: number, text: string): void => {
         setEditModalId(id);
         setEditModalText(text);
         setIsEditModalVisible(!isEditModalVisible);
@@ -149,10 +149,6 @@ export default function Main() {
             { cancelable: false }
         );
     };
-
-    useEffect(() => {
-        _retrieveData();
-    }, []);
 
     useEffect(() => {
         _retrieveData();

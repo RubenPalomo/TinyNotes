@@ -13,6 +13,7 @@ export async function PlaySound(
         }
         await soundObject.replayAsync();
         await soundObject.setIsLoopingAsync(playInLoop);
+        soundObject = null;
     } catch (error) {
         console.error("Error while playing sound:", error);
     }
