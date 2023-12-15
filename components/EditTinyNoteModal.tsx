@@ -4,7 +4,7 @@ import Bubble from "./Bubble";
 import { t } from "../translations/translator";
 
 interface EditTinyNoteModalProps {
-    id: number;
+    id: number | undefined;
     noteToEdit: string;
     isModalVisible: boolean;
     closeModal: () => void;

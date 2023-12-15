@@ -150,6 +150,8 @@ const styles = StyleSheet.create({
         width: 55,
         maxWidth: 55,
         height: 57,
+        minHeight: 57,
+        maxHeight: 57,
     },
     optionsSecondaryButton: {
         backgroundColor: "white",
