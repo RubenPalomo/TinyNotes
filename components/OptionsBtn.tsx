@@ -6,7 +6,7 @@ import {
     Feather,
     MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { PlaySound } from "./PlaySound";
+import { PlaySound } from "../util/PlaySound";
 import { t } from "../translations/translator";
 
 interface propsOptionsBtn {

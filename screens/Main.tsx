@@ -5,12 +5,12 @@ import { ScreenDimensions } from "../constants/ScreenDimensions";
 import { t } from "../translations/translator";
 import Header from "../components/Header";
 import Bubble from "../components/Bubble";
-import FormularyModal from "../components/FormularyModal";
+import AddTinyNoteModal from "../components/AddTinyNoteModal";
 import OptionsBtn from "../components/OptionsBtn";
 import {
     schedulePushNotification,
     cancelScheduledNotification,
-} from "../components/PushNotificationsManager";
+} from "../util/PushNotificationsManager";
 
 interface storedDataObject {
     text: string;
@@ -131,7 +131,7 @@ export default function Main() {
                     />
                 ))}
             </ScrollView>
-            <FormularyModal
+            <AddTinyNoteModal
                 isModalVisible={isModalVisible}
                 changeModalVisibility={changeModalVisibility}
                 addFunction={addElementToToDoList}

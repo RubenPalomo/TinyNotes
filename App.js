@@ -2,13 +2,12 @@ import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import Main from "./screens/Main";
 
 export default function App() {
     useEffect(() => {
         const notificationListener =
-            Notifications.addNotificationReceivedListener((notification) => {
+            Notifications.addNotificationReceivedListener(() => {
                 //console.log("Notification received:", notification);
             });
 
