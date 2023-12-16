@@ -63,10 +63,18 @@ export default function OptionsBtn(props: propsOptionsBtn) {
                 >
                     <Text style={styles.optionsBtnText}>{t("Add_new")}</Text>
                     <Pressable
-                        style={styles.optionsButton}
+                        style={[
+                            styles.optionsButton,
+                            styles.optionsSecondaryButton,
+                        ]}
                         onPress={addElement}
                     >
-                        <SimpleLineIcons name="note" size={45} color="black" />
+                        <SimpleLineIcons
+                            name="note"
+                            size={25}
+                            color="black"
+                            style={styles.optionsBtnIcon}
+                        />
                     </Pressable>
                 </View>
                 <View
@@ -79,10 +87,18 @@ export default function OptionsBtn(props: propsOptionsBtn) {
                 >
                     <Text style={styles.optionsBtnText}>{t("Delete_all")}</Text>
                     <Pressable
-                        style={styles.optionsButton}
+                        style={[
+                            styles.optionsButton,
+                            styles.optionsSecondaryButton,
+                        ]}
                         onPress={removeAllElements}
                     >
-                        <Feather name="trash-2" size={45} color="black" />
+                        <Feather
+                            name="trash-2"
+                            size={30}
+                            color="black"
+                            style={styles.optionsBtnIcon}
+                        />
                     </Pressable>
                 </View>
             </Animated.View>
@@ -94,14 +110,15 @@ export default function OptionsBtn(props: propsOptionsBtn) {
                     <Ionicons
                         name="ios-add"
                         size={45}
-                        color="black"
-                        style={{ textAlign: "center" }}
+                        color="white"
+                        style={styles.optionsBtnIcon}
                     />
                 ) : (
                     <MaterialCommunityIcons
                         name="window-close"
-                        size={45}
-                        color="red"
+                        size={35}
+                        color="white"
+                        style={styles.optionsBtnIcon}
                     />
                 )}
             </Pressable>
@@ -127,11 +144,18 @@ const styles = StyleSheet.create({
         alignContent: "center",
         backgroundColor: "gold",
         elevation: 5,
-        borderRadius: 20,
+        borderRadius: 50,
         padding: 5,
         margin: 5,
+        width: 55,
         maxWidth: 55,
+        height: 57,
+        minHeight: 57,
         maxHeight: 57,
+    },
+    optionsSecondaryButton: {
+        backgroundColor: "white",
+        borderWidth: 1,
     },
     optionsBtnText: {
         alignContent: "center",
@@ -139,5 +163,9 @@ const styles = StyleSheet.create({
         width: 125,
         height: 30,
         marginTop: "7%",
+        marginRight: 5,
+    },
+    optionsBtnIcon: {
+        textAlign: "center",
     },
 });

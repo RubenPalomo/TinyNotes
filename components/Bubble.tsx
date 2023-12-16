@@ -14,6 +14,10 @@ export default function Bubble(props: BubbleProps) {
     let padding: number;
     let fontSize: number;
     let textAlign: "center" | "left";
+    const backgroundColor = props.backgroundColor
+        ? props.backgroundColor
+        : "gold";
+
     if (!props.isList) {
         padding = 15;
         fontSize = 20;
@@ -37,16 +41,10 @@ export default function Bubble(props: BubbleProps) {
             <Pressable
                 style={[
                     styles.bubbleInnerContainer,
-                    props.backgroundColor
-                        ? {
-                              padding: padding,
-                              backgroundColor: props.backgroundColor,
-                          }
-                        : {
-                              padding: padding,
-                              backgroundColor: "gold",
-                          },
-                    props.backgroundColor !== "white" && {
+                    {
+                        padding: padding,
+                    },
+                    backgroundColor !== "white" && {
                         borderWidth: 3,
                         borderColor: "gold",
                     },
