@@ -17,7 +17,7 @@ interface TinyNoteComponentProps {
 export default function TinyNoteComponent(props: TinyNoteComponentProps) {
     const [showOptions, setShowOptions] = useState<boolean>(false);
 
-    const openOptions = (): void => {
+    const interactOptions = (): void => {
         props.changeOpenNoteId(props.id);
         setShowOptions(!showOptions);
     };
@@ -32,7 +32,7 @@ export default function TinyNoteComponent(props: TinyNoteComponentProps) {
             <Pressable
                 style={styles.optionsIcon}
                 onPressIn={PlayClickSound}
-                onPress={openOptions}
+                onPress={interactOptions}
             >
                 <SimpleLineIcons
                     name="options-vertical"
@@ -42,8 +42,14 @@ export default function TinyNoteComponent(props: TinyNoteComponentProps) {
             </Pressable>
             <TinyNoteMenu
                 isShowed={showOptions}
-                editNote={() => props.editElementFromToDoList(props.text)}
-                deleteNote={() => props.removeElementFromToDoList(props.text)}
+                editNote={() => {
+                    props.editElementFromToDoList(props.text);
+                    setShowOptions(false);
+                }}
+                deleteNote={() => {
+                    props.removeElementFromToDoList(props.text);
+                    setShowOptions(false);
+                }}
             />
         </View>
     );

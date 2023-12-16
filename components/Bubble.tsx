@@ -43,6 +43,7 @@ export default function Bubble(props: BubbleProps) {
                     styles.bubbleInnerContainer,
                     {
                         padding: padding,
+                        backgroundColor: backgroundColor,
                     },
                     backgroundColor !== "white" && {
                         borderWidth: 3,
