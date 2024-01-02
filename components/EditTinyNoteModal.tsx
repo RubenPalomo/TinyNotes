@@ -8,7 +8,11 @@ interface EditTinyNoteModalProps {
     noteToEdit: string;
     isModalVisible: boolean;
     closeModal: () => void;
-    editFunction: (id: number, elementToEdit: string) => void;
+    editFunction: (
+        id: number,
+        elementToEdit: string,
+        newElement: string
+    ) => void;
 }
 
 export default function EditTinyNoteModal(props: EditTinyNoteModalProps) {
@@ -21,7 +25,7 @@ export default function EditTinyNoteModal(props: EditTinyNoteModalProps) {
 
         if (textToSave !== "") {
             props.closeModal();
-            props.editFunction(props.id, textToSave);
+            props.editFunction(props.id, props.noteToEdit, textToSave);
             setTextInputValue("");
         }
     };

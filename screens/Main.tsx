@@ -72,15 +72,22 @@ export default function Main() {
 
     const editElementFromToDoList = async (
         id: number,
-        elementToEdit: string
+        elementToEdit: string,
+        newElement: string
     ): Promise<void> => {
+        const notificationToRemove = appData.find(
+            (item) => item.text === elementToEdit
+        ).idNotification;
+
+        cancelScheduledNotification(notificationToRemove);
+
         const idNotification = await schedulePushNotification(
             t("Something_to_do"),
-            elementToEdit,
+            newElement,
             86400
         );
         const editedObject: storedDataObject = {
-            text: elementToEdit,
+            text: newElement,
             idNotification: idNotification,
         };
 
