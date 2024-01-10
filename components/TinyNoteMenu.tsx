@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Pressable, Text, StyleSheet } from "react-native";
 import { PlayClickSound } from "../util/PlaySound";
+import { t } from "../translations/translator";
 
 interface TinyNoteMenuProps {
     isShowed: boolean;
@@ -22,7 +23,7 @@ export default function TinyNoteMenu(props: TinyNoteMenuProps) {
                     onPress={props.editNote}
                     android_ripple={{ color: "lightgray" }}
                 >
-                    <Text style={styles.TinyNoteMenuText}>Editar</Text>
+                    <Text style={styles.TinyNoteMenuText}>{t("Edit")}</Text>
                 </Pressable>
             </View>
             <View style={styles.TinyNoteMenuButton}>
@@ -31,7 +32,7 @@ export default function TinyNoteMenu(props: TinyNoteMenuProps) {
                     onPress={props.deleteNote}
                     android_ripple={{ color: "lightgray" }}
                 >
-                    <Text style={styles.TinyNoteMenuText}>Eliminar</Text>
+                    <Text style={styles.TinyNoteMenuText}>{t("Delete")}</Text>
                 </Pressable>
             </View>
         </View>
