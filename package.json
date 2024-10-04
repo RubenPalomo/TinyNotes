@@ -1,6 +1,6 @@
 {
     "name": "tinynotes",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "start": "expo start",
@@ -25,12 +25,13 @@
         "react-native-keyboard-aware-scroll-view": "^0.9.5",
         "react-native-localize": "^3.0.2",
         "react-native-web": "~0.19.6",
+        "tinynotes": "file:",
         "typescript": "*",
         "webpack-dev-server": "^4.15.1"
     },
     "devDependencies": {
         "@babel/core": "^7.20.0",
-        "@types/react-native": "^0.72.2",
+        "@types/react-native": "^0.73.0",
         "@typescript-eslint/eslint-plugin": "^6.14.0",
         "@typescript-eslint/parser": "^6.14.0",
         "eslint": "^8.0.1",

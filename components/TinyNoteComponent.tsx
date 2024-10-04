@@ -42,8 +42,14 @@ export default function TinyNoteComponent(props: TinyNoteComponentProps) {
             </Pressable>
             <TinyNoteMenu
                 isShowed={showOptions}
-                editNote={() => props.editElementFromToDoList(props.text)}
-                deleteNote={() => props.removeElementFromToDoList(props.text)}
+                editNote={() => {
+                    props.editElementFromToDoList(props.text);
+                    setShowOptions(false);
+                }}
+                deleteNote={() => {
+                    props.removeElementFromToDoList(props.text);
+                    setShowOptions(false);
+                }}
             />
         </View>
     );
